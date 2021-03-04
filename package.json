@@ -1,5 +1,9 @@
 {
   "name": "filter-interview-problem",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "react": "~17.0.1",
+    "react-dom": "~17.0.1"
+  }
 }
