@@ -3,6 +3,12 @@ const app = express();
 
 const data = JSON.parse(require('fs').readFileSync('data.json', 'utf-8'));
 
+app.use(function (req, res, next) {
+    const { term } = req.query;
+    const delay = term === 'ros' ? 3400 : 0;
+    setTimeout(next, delay);
+});
+
 app.get('/ping', function (req, res) {
     return res.send(`OK ${Date.now()}`);
 });
