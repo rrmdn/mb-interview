@@ -8,7 +8,14 @@ app.get('/ping', function (req, res) {
 });
 
 app.get('/search', function (req, res) {
-    return res.json(data);
+    const { term } = req.query;
+    if (!term) {
+        return res.json(data);
+    }
+    const q = term.toLowerCase();
+    const match = ({ name }) => name.toLowerCase().indexOf(q) >= 0;
+    const result = data.filter(match);
+    return res.json(result);
 });
 
 app.listen(process.env.PORT || 8080);
