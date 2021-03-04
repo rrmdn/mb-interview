@@ -40,7 +40,7 @@ Acceptance test:
 2. The user clicks on the _Search_ button.
 3. The user waits for 500 ms.
 4. The user sees a loading indicator.
-5. After some time (typically 3 seconds), the table displays Z rows.
+5. After some time (typically 3 seconds), the table displays 1 row.
 
 ### Filter-as-you-type
 
