@@ -20,6 +20,10 @@ Create a text input and a button titled `Search`. This will be used by the user 
 
 Assume that the database on the server changes only every 60 seconds. To reduce the network traffic, cache the search result for 5 seconds. Store only the most 3 recent search results in the cache.
 
+![](/screenshots/image1.png)
+
+_Note: The above screenshot is only for your reference. Your user interface implementation does not need to be a pixel-perfect replica, as long as it is functional._
+
 Acceptance test:
 1. The user types `mar` into the search input.
 2. The user clicks on the _Search_ button.
