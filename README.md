@@ -51,7 +51,7 @@ Note that in step 5, the loading indicator **should** disappear.
 
 Remove the _Search_ button. Now the table should be filtered everytime the user changes the search term in the input field.
 
-Note that the server throttles the incoming search requests to a rate of maximum 10x per second (otherwise, the server will respond with HTTP 403 Forbidden). Therefore, implement a debounce on the change of the search term.
+Note that the server throttles the incoming search requests to a rate of maximum 10x per second (otherwise, the server will respond with [HTTP 429 Too Many Requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429)). Therefore, implement a debounce on the change of the search term.
 
 Acceptance test:
 1. The user types `mar` (quickly) into the search input.
