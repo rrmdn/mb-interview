@@ -13,7 +13,16 @@ app.get('/ping', function (req, res) {
     return res.send(`OK ${Date.now()}`);
 });
 
+let lastTimestamp = Date.now();
+
 app.get('/search', function (req, res) {
+    const now = Date.now();
+    const elapsed = now - lastTimestamp;
+    lastTimestamp = now;
+    if (elapsed < 100) {
+        return res.sendStatus(403);
+    }
+
     const { term } = req.query;
     if (!term) {
         return res.json(data);
