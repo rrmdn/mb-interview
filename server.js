@@ -20,7 +20,7 @@ app.get('/search', function (req, res) {
     const elapsed = now - lastTimestamp;
     lastTimestamp = now;
     if (elapsed < 100) {
-        return res.sendStatus(403);
+        return res.sendStatus(429);
     }
 
     const { term } = req.query;
