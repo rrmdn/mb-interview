@@ -60,3 +60,14 @@ Acceptance test:
 5. The table displays only 1 row.
 
 Note that between step 1 and 6, the front-end code **should only** make two API calls to the back-end server, for getting the search result of `mar` and `marlo`, respectively.
+
+### #4 Match highlight
+
+For each row displayed in the table, highlight the characters in the column _Name_ which match the search term.
+
+![](/screenshots/image4.png)
+
+Acceptance test:
+1. The user types `ke` into the search input.
+3. The table displays 6 rows.
+4. Every `name` in each row has its `ke` characters highlighted.
