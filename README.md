@@ -55,9 +55,9 @@ Note that the server throttles the incoming search requests to a rate of maximum
 
 Acceptance test:
 1. The user types `mar` (quickly) into the search input.
-3. The table displays 3 rows (because those are the rows which have the search term).
-4. The user changes the search term (quickly) into `marlo`.
-5. The table displays only 1 row.
+2. The table displays 3 rows (because those are the rows which have the search term).
+3. The user changes the search term (quickly) into `marlo`.
+4. The table displays only 1 row.
 
 Note that between step 1 and 6, the front-end code **should only** make two API calls to the back-end server, for getting the search result of `mar` and `marlo`, respectively.
 
@@ -69,5 +69,5 @@ For each row displayed in the table, highlight the characters in the column _Nam
 
 Acceptance test:
 1. The user types `ke` into the search input.
-3. The table displays 6 rows.
-4. Every `name` in each row has its `ke` characters highlighted.
+2. The table displays 6 rows.
+3. Every `name` in each row has its `ke` characters highlighted.
