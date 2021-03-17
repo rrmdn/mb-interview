@@ -71,3 +71,15 @@ Acceptance test:
 1. The user types `ke` into the search input.
 2. The table displays 6 rows.
 3. Every `name` in each row has its `ke` characters highlighted.
+
+### #5 Multi-word match
+
+**Without** changing the back-end server (`server.js`), add the support to find all matches based on a 2-word or 3-word search term.
+
+![](/screenshots/image5.png)
+
+Acceptance test:
+1. The user types `ry sa` (note the space in between) into the search input.
+2. The table displays only 1 row, for "Susan Corkery".
+
+_Hint_: Perform two or more API calls. Pay attention to the rate limit (HTTP 429 response).
