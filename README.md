@@ -59,7 +59,7 @@ Acceptance test:
 3. The user changes the search term (quickly) into `marlo`.
 4. The table displays only 1 row.
 
-Note that between step 1 and 6, the front-end code **should only** make two API calls to the back-end server, for getting the search result of `mar` and `marlo`, respectively.
+Note that between step 1 and 4, the front-end code **should only** make two API calls to the back-end server, for getting the search result of `mar` and `marlo`, respectively.
 
 ### #4 Match highlight
 
