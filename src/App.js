@@ -11,6 +11,23 @@ const getData = async (searchTerm) => {
   }
 };
 
+const Row = ({ row, term }) => {
+  const highlightedName = React.useMemo(() => {
+    let name = row.name;
+    const startPosition = name.toLowerCase().indexOf(term.toLowerCase());
+    const endPosition = startPosition + term.length;
+    const toHighlight = name.slice(startPosition, endPosition);
+    return name.replace(toHighlight, "<strong>" + toHighlight + "</strong>");
+  }, [row.name, term]);
+  return (
+    <tr>
+      <td dangerouslySetInnerHTML={{ __html: highlightedName }}></td>
+      <td>{row.phone}</td>
+      <td>{row.address}</td>
+    </tr>
+  );
+};
+
 const useSearch = (term) => {
   const [debouncedTerm, setDebouncedTerm] = React.useState(term);
   React.useEffect(() => {
@@ -78,13 +95,7 @@ export default function App() {
             <th>Address</th>
           </tr>
           {search.results.map((row) => {
-            return (
-              <tr>
-                <td>{row.name}</td>
-                <td>{row.phone}</td>
-                <td>{row.address}</td>
-              </tr>
-            );
+            return <Row key={row.phone} row={row} term={state.term} />;
           })}
         </table>
       </div>
