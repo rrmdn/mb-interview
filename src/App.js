@@ -13,6 +13,7 @@ const getData = async (searchTerm) => {
 
 const useSearch = (term) => {
   const [results, setResults] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
   const cacheRef = React.useRef(
     // https://www.npmjs.com/package/map-expire
     new MapExpire([], { capacity: 3, duration: 5000 })
@@ -22,12 +23,20 @@ const useSearch = (term) => {
     if (cached) {
       return setResults(cached);
     }
+    const timeout = setTimeout(() => {
+      setIsLoading(true);
+    }, 500);
+
     getData(term).then((results) => {
       cacheRef.current.set(term, results);
       setResults(results);
+      clearTimeout(timeout);
+      setIsLoading(false);
     });
+
+    return () => !!timeout && clearTimeout(timeout);
   }, [term]);
-  return { results };
+  return { results, isLoading };
 };
 
 export default function App() {
@@ -51,8 +60,13 @@ export default function App() {
           <button onClick={handleSearch}>Search</button>
         </div>
       </div>
-      <div>
-        <table>
+      <div
+        className={
+          search.isLoading &&
+          "animate__animated animate__flash animate__infinite"
+        }
+      >
+        <table position="absolute" inset="0">
           <tr>
             <th>Name</th>
             <th>Phone</th>
