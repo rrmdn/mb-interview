@@ -14,10 +14,14 @@ const getData = async (searchTerm) => {
 const Row = ({ row, term }) => {
   const highlightedName = React.useMemo(() => {
     let name = row.name;
-    const startPosition = name.toLowerCase().indexOf(term.toLowerCase());
-    const endPosition = startPosition + term.length;
-    const toHighlight = name.slice(startPosition, endPosition);
-    return name.replace(toHighlight, "<strong>" + toHighlight + "</strong>");
+    for (const splitTerm of term.split(" ")) {
+      const startPosition = name.toLowerCase().indexOf(splitTerm.toLowerCase());
+      const endPosition = startPosition + splitTerm.length;
+      const toHighlight = name.slice(startPosition, endPosition);
+      name = name.replace(toHighlight, "<strong>" + toHighlight + "</strong>");
+    }
+
+    return name;
   }, [row.name, term]);
   return (
     <tr>
@@ -51,7 +55,18 @@ const useSearch = (term) => {
       setIsLoading(true);
     }, 500);
 
-    getData(debouncedTerm).then((results) => {
+    Promise.all(
+      debouncedTerm.split(" ").map(async (splitTerm, i) => {
+        await new Promise((resolve) => {
+          setTimeout(resolve, i * 200);
+        });
+        return getData(splitTerm);
+      })
+    ).then((matches) => {
+      const results = matches.reduce((prev, cur) => {
+        if (prev.length === 0) return cur;
+        return _.intersectionBy(prev, cur, (row) => row.name);
+      }, []);
       cacheRef.current.set(debouncedTerm, results);
       setResults(results);
       clearTimeout(timeout);
